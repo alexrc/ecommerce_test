@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="Content/main.css"/>
 </head>
 <body>
-    <!-- <form id="form1" runat="server"> -->
     <div class="container">
       <div class="row">
         <h1>Dev Shop</h1>
@@ -23,7 +22,7 @@
 
       <div class="row">
         <h2>Add a developer</h2>
-        <form class="form-inline" role="form">
+        <form id="form1" runat="server" class="form-inline" role="form">
           <div class="form-group">
             <input type="text" placeholder="GitHub Username" class="form-control" />
           </div>
@@ -81,6 +80,6 @@
 
     <script src="Scripts/bootstrap.js"></script>
     <!-- <script src="script/main.js"></script> -->
-    </form>
+
 </body>
 </html>
