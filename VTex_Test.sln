@@ -3,34 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "VTex", "http://localhost:15787", "{E21A3FA1-6433-48B3-86D9-DC84558C82A5}"
-	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_15787"
-		Debug.AspNetCompiler.PhysicalPath = "..\VTex\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_15787\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_15787"
-		Release.AspNetCompiler.PhysicalPath = "..\VTex\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_15787\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\VTex\"
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{71B26D00-E2AA-4086-A9F0-1841E2EDF404}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E21A3FA1-6433-48B3-86D9-DC84558C82A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E21A3FA1-6433-48B3-86D9-DC84558C82A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B26D00-E2AA-4086-A9F0-1841E2EDF404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71B26D00-E2AA-4086-A9F0-1841E2EDF404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B26D00-E2AA-4086-A9F0-1841E2EDF404}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71B26D00-E2AA-4086-A9F0-1841E2EDF404}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
