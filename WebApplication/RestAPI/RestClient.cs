@@ -5,6 +5,7 @@ using System.Web;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net;
+using System.IO;
 
 namespace WebApplication.RestAPI
 {
@@ -38,7 +39,7 @@ namespace WebApplication.RestAPI
 
         }
 
-        public HttpResponseMessage getAll()
+        public string getAll()
         {
             //HttpResponseMessage response;
 
@@ -48,9 +49,21 @@ namespace WebApplication.RestAPI
             req.ServicePoint.Expect100Continue = false;
             req.KeepAlive = false;
             req.Headers[HttpRequestHeader.Authorization] = "Basic YWxleHJjOmFwdGl2YTEy";
-            
+            req.Method = "Get";
+            req.UserAgent = "WebApplication";
 
-            WebResponse resp = req.GetResponse();
+            //WebResponse resp = req.GetResponse();
+            try
+            {
+                using (StreamReader responseReader = new StreamReader(req.GetResponse().GetResponseStream()))
+                    return responseReader.ReadToEnd();
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
 
             //se retornar com sucesso busca os dados
             //if (response.IsSuccessStatusCode)
@@ -70,8 +83,6 @@ namespace WebApplication.RestAPI
             //else
             //    //Response.Write(response.StatusCode.ToString() + " - " + response.ReasonPhrase);
 
-
-            return null;
         }
 
     }
