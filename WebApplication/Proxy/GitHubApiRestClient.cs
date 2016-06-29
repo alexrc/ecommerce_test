@@ -13,7 +13,7 @@ using WebApplication.Models;
 
 namespace WebApplication.RestAPI
 {
-    public class RestClient
+    public class GitHubApiRestClient
     {
         HttpWebRequest req;
 
@@ -28,25 +28,23 @@ namespace WebApplication.RestAPI
             req.UserAgent = "WebApplication";
         }
 
-        public string getAllUsers()
+        public IEnumerable<User> GetAllUsers()
         {
             CreateRequest("https://api.github.com/users");
-
+            string jsonResponse;
             try
             {
                 using (StreamReader responseReader = new StreamReader(req.GetResponse().GetResponseStream()))
-                    return responseReader.ReadToEnd();
+                    jsonResponse = responseReader.ReadToEnd();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-        }
 
-        public IEnumerable<User> GetAllUsers()
-        {
             JavaScriptSerializer json_serializer = new JavaScriptSerializer();
-            return JsonConvert.DeserializeObject<IEnumerable<User>>(getAllUsers());
+            
+            return JsonConvert.DeserializeObject<IEnumerable<User>>(jsonResponse);
         }
     }
 }
