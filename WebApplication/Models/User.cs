@@ -25,9 +25,4 @@ namespace WebApplication.Models
         public string type { get; set; }
         public bool site_admin { get; set; }
     }
-
-    public class UserCollection
-    {
-        public IEnumerable<User> users { get; set; }
-    }
 }

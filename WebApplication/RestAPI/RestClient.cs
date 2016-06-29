@@ -15,26 +15,23 @@ namespace WebApplication.RestAPI
 {
     public class RestClient
     {
-        HttpClient client;
-        Uri usuarioUri;
         HttpWebRequest req;
 
-        public RestClient()
+        private void CreateRequest(string url)
         {
-            if (client == null)
-            {
-                req = (HttpWebRequest)WebRequest.Create("https://api.github.com/users");
+            req = (HttpWebRequest)WebRequest.Create(url);
 
-                req.ServicePoint.Expect100Continue = false;
-                req.KeepAlive = false;
-                req.Headers[HttpRequestHeader.Authorization] = "Basic YWxleHJjOmFwdGl2YTEy";
-                req.Method = "Get";
-                req.UserAgent = "WebApplication";
-            }
+            req.ServicePoint.Expect100Continue = false;
+            req.KeepAlive = false;
+            req.Headers[HttpRequestHeader.Authorization] = "Basic YWxleHJjOmFwdGl2YTEy";
+            req.Method = "Get";
+            req.UserAgent = "WebApplication";
         }
 
         public string getAllUsers()
         {
+            CreateRequest("https://api.github.com/users");
+
             try
             {
                 using (StreamReader responseReader = new StreamReader(req.GetResponse().GetResponseStream()))
