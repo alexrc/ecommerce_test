@@ -6,6 +6,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net;
 using System.IO;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using System.Collections;
+using WebApplication.Models;
 
 namespace WebApplication.RestAPI
 {
@@ -13,77 +17,39 @@ namespace WebApplication.RestAPI
     {
         HttpClient client;
         Uri usuarioUri;
+        HttpWebRequest req;
 
         public RestClient()
         {
             if (client == null)
             {
-                //client = new HttpClient();
-                //client.BaseAddress = new Uri("https://api.github.com/");
-                //client.DefaultRequestHeaders.Accept.Clear();
-                //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                req = (HttpWebRequest)WebRequest.Create("https://api.github.com/users");
 
-                //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", //"YWxleHJjOmFwdGl2YTEy");
-                //Convert.ToBase64String(
-                //        System.Text.ASCIIEncoding.ASCII.GetBytes(
-                //            string.Format("{0}:{1}", "alexrc", "aptiva12"))));
-
-            // New code:
-            //HttpResponseMessage response = await client.GetAsync("api/products/1");
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    Product product = await response.Content.ReadAsAsync>Product>();
-            //    Console.WriteLine("{0}\t${1}\t{2}", product.Name, product.Price, product.Category);
-            //}
+                req.ServicePoint.Expect100Continue = false;
+                req.KeepAlive = false;
+                req.Headers[HttpRequestHeader.Authorization] = "Basic YWxleHJjOmFwdGl2YTEy";
+                req.Method = "Get";
+                req.UserAgent = "WebApplication";
             }
-
         }
 
-        public string getAll()
+        public string getAllUsers()
         {
-            //HttpResponseMessage response;
-
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://api.github.com/users");
-            //chamando a api pela url
-            //response = client.GetAsync("/users").Result;
-            req.ServicePoint.Expect100Continue = false;
-            req.KeepAlive = false;
-            req.Headers[HttpRequestHeader.Authorization] = "Basic YWxleHJjOmFwdGl2YTEy";
-            req.Method = "Get";
-            req.UserAgent = "WebApplication";
-
-            //WebResponse resp = req.GetResponse();
             try
             {
                 using (StreamReader responseReader = new StreamReader(req.GetResponse().GetResponseStream()))
                     return responseReader.ReadToEnd();
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                throw ex;
             }
-
-            //se retornar com sucesso busca os dados
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    //pegando o cabeçalho
-            //    usuarioUri = response.Headers.Location;
-
-            //    //Pegando os dados do Rest e armazenando na variável usuários
-            //    //var usuarios = response.Content.ReadAsAsync<IEnumerable<Usuario>>().Result;
-
-            //    ////preenchendo a lista com os dados retornados da variável
-            //    //GridView1.DataSource = usuarios;
-            //    //GridView1.DataBind();
-            //}
-
-            //Se der erro na chamada, mostra o status do código de erro.
-            //else
-            //    //Response.Write(response.StatusCode.ToString() + " - " + response.ReasonPhrase);
-
         }
 
+        public IEnumerable<User> GetAllUsers()
+        {
+            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+            return JsonConvert.DeserializeObject<IEnumerable<User>>(getAllUsers());
+        }
     }
 }
